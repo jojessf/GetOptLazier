@@ -6,7 +6,7 @@ use warnings;
 
 =head1 NAME
 
-Getopt::Lazier - The great new Getopt::Lazier!
+Getopt::Lazier - Lazy Getopt-like BS
 
 =head1 VERSION
 
@@ -19,14 +19,7 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
-    use Getopt::Lazier;
-
-    my $foo = Getopt::Lazier->new();
-    ...
+my ($opt, @DARG) = new(@ARGV);
 
 =head1 EXPORT
 
@@ -35,23 +28,33 @@ if you don't export anything, such as for a purely object-oriented module.
 
 =head1 SUBROUTINES/METHODS
 
-=head2 function1
+=head2 new
 
 =cut
 
-sub function1 {
-}
-
-=head2 function2
-
-=cut
-
-sub function2 {
-}
+sub new {    # reimplemented from DocCommon to allow for ENV.
+                       # DNM: I <3 this function.
+   my @ARGA = @_;
+   my $opt  = {};
+   my @DARG;
+   my $var = uc(basename($0));
+   unshift(@ARGA, split(/\s+/, $ENV{$var})) if ($ENV{$var});
+   foreach my $ar (@ARGA) {
+      if ($ar =~ m!^-(.*?)[=|:](.*)!) {
+         ${$opt}{$1} = $2;
+      } elsif ($ar =~ m!^-(.*)$!) {
+         ${$opt}{$1} = 1;
+      } else {
+         push @DARG, $ar;
+      }
+   } ## end foreach my $ar (@ARGA)
+   return ($opt, @DARG);
+} ## end sub lazyarguments
 
 =head1 AUTHOR
 
 Jojess Fournier, C<< <jojessfournier at gmail.com> >>
+Dave Maez
 
 =head1 BUGS
 
@@ -71,6 +74,8 @@ You can find documentation for this module with the perldoc command.
 
 You can also look for information at:
 
+L<https://github.com/jojessf/GetOptLazier>
+
 =over 4
 
 =item * RT: CPAN's request tracker (report bugs here)
@@ -89,7 +94,7 @@ L<https://metacpan.org/release/Getopt-Lazier>
 
 
 =head1 ACKNOWLEDGEMENTS
-
+Thanks to Dave for the ENV addition.  :3 
 
 =head1 LICENSE AND COPYRIGHT
 
@@ -97,7 +102,7 @@ This software is Copyright (c) 2024 by Jojess Fournier.
 
 This is free software, licensed under:
 
-  The Artistic License 2.0 (GPL Compatible)
+  GNU GENERAL PUBLIC LICENSE 3.0
 
 
 =cut
