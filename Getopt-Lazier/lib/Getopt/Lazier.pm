@@ -3,6 +3,7 @@ package Getopt::Lazier;
 use 5.006;
 use strict;
 use warnings;
+use File::Basename;
 
 =head1 NAME
 
@@ -19,21 +20,47 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-my ($opt, @DARG) = new(@ARGV);
+`my ($opt, @DARG) = Getopt::Lazier->new(@ARGV);`
+
+=head1 EXAMPLE USAGE
+
+echo '
+  use lib "./lib"; use Getopt::Lazier; 
+  my ($opt, @DARG) = Getopt::Lazier->new(@ARGV); 
+  use Data::Dumper; print Dumper([$opt, \@DARG])
+' > lazyscript.pl
+perl lazyscript.pl -help a b c d -meow=5345923
+
+$VAR1 = [
+          {
+            'meow' => '5345923',
+            'help' => 1
+          },
+          [
+            'a',
+            'b',
+            'c',
+            'd'
+          ]
+        ];
+
+=cut 
 
 =head1 EXPORT
 
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
+eh, maybe later
 
 =head1 SUBROUTINES/METHODS
 
 =head2 new
 
+The laziest way to parse arguments tho
+
 =cut
 
 sub new {    # reimplemented from DocCommon to allow for ENV.
                        # DNM: I <3 this function.
+   my $self = shift;
    my @ARGA = @_;
    my $opt  = {};
    my @DARG;
@@ -53,8 +80,7 @@ sub new {    # reimplemented from DocCommon to allow for ENV.
 
 =head1 AUTHOR
 
-Jojess Fournier, C<< <jojessfournier at gmail.com> >>
-Dave Maez
+Jojess Fournier, C<< <jojessfournier at gmail.com> >>, Dave Maez
 
 =head1 BUGS
 
@@ -94,8 +120,10 @@ L<https://metacpan.org/release/Getopt-Lazier>
 
 
 =head1 ACKNOWLEDGEMENTS
-Thanks to Dave for the ENV addition.  :3 
 
+Thanks to Dave for the ENV addition.  Also for being awesome. :3 
+
+=cut
 =head1 LICENSE AND COPYRIGHT
 
 This software is Copyright (c) 2024 by Jojess Fournier.
