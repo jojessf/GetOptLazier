@@ -1,0 +1,2 @@
+#!/bin/bash
+perl Makefile.PL && make test && make distcheck && make dist
