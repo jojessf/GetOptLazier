@@ -1,6 +1,10 @@
 # GetOptLazier
 The laziest perl arg parser around
 
+# cpan
+now in cpan! \
+`cpanm Getopt::Lazier`
+
 # Synopsis
 
 `my ($opt, @DARG) = Getopt::Lazier->new(@ARGV);`
