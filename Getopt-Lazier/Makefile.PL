@@ -5,7 +5,7 @@ use ExtUtils::MakeMaker;
 
 my %WriteMakefileArgs = (
     NAME             => 'Getopt::Lazier',
-    AUTHOR           => q{Jojess Fournier <jojessfournier@gmail.com>},
+    AUTHOR           => q{Jojess Fournier <jojessf@cpan.org>},
     VERSION_FROM     => 'lib/Getopt/Lazier.pm',
     ABSTRACT_FROM    => 'lib/Getopt/Lazier.pm',
     LICENSE          => 'artistic_2',

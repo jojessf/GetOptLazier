@@ -7,48 +7,46 @@ use File::Basename;
 
 =head1 NAME
 
-Getopt::Lazier - Lazy Getopt-like BS
+Getopt::Lazier - Lazy Getopt-like command-line options and argument parser
 
 =head1 VERSION
 
-Version 0.01
+Version 0.03
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.03';
 
 
 =head1 SYNOPSIS
 
 `my ($opt, @DARG) = Getopt::Lazier->new(@ARGV);`
 
-=head1 EXAMPLE USAGE
+=head2 EXAMPLE USAGE
 
-echo '
-  use lib "./lib"; use Getopt::Lazier; 
-  my ($opt, @DARG) = Getopt::Lazier->new(@ARGV); 
-  use Data::Dumper; print Dumper([$opt, \@DARG])
-' > lazyscript.pl
-perl lazyscript.pl -help a b c d -meow=5345923
+   use Getopt::Lazier;
 
-$VAR1 = [
-          {
-            'meow' => '5345923',
-            'help' => 1
-          },
-          [
-            'a',
-            'b',
-            'c',
-            'd'
-          ]
-        ];
+   my ($opt, @DARG) = Getopt::Lazier->new(@ARGV);
+
+   use Data::Dumper; print Dumper([$opt, \@DARG])."\n";
+
+   # perl lazyscript.pl -help a b c d -meow=5345923 -awoo="doggo vibes"
+
+   $VAR1 = [
+      {
+         'awoo' => 'doggo vibes',
+         'meow' => '5345923',
+         'help' => 1
+      },
+      [
+         'a',
+         'b',
+         'c',
+         'd'
+      ]
+   ];
 
 =cut 
-
-=head1 EXPORT
-
-eh, maybe later
 
 =head1 SUBROUTINES/METHODS
 
@@ -80,7 +78,7 @@ sub new {    # reimplemented from DocCommon to allow for ENV.
 
 =head1 AUTHOR
 
-Jojess Fournier, C<< <jojessfournier at gmail.com> >>, Dave Maez
+Jojess Fournier, C<< <jojessf@cpan.org> >>, Dave Maez
 
 =head1 BUGS
 
