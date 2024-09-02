@@ -67,16 +67,16 @@ sub new {    # reimplemented from DocCommon to allow for ENV.
    my $var = uc(basename($0));
    unshift(@ARGA, split(/\s+/, $ENV{$var})) if ($ENV{$var});
    foreach my $ar (@ARGA) {
-      if ($ar =~ m!^-(.*?)[=|:](.*)!) {
+      if ($ar =~ m/^-(.*?)[=|:](.*)/) {
          ${$opt}{$1} = $2;
-      } elsif ($ar =~ m!^-(.*)$!) {
+      } elsif ($ar =~ m/^-(.*)$/) {
          ${$opt}{$1} = 1;
       } else {
          push @DARG, $ar;
       }
-   } ## end foreach my $ar (@ARGA)
+   }
    return ($opt, @DARG);
-} ## end sub lazyarguments
+}
 
 =head1 AUTHOR
 
