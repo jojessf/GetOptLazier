@@ -11,11 +11,11 @@ Getopt::Lazier - Lazy Getopt-like command-line options and argument parser
 
 =head1 VERSION
 
-Version 0.04
+Version 0.06
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.06';
 
 
 =head1 SYNOPSIS
@@ -112,7 +112,7 @@ sub import {
 
 sub new {        # DNM: I <3 this function.
    my $self = shift;
-   my @ARGA = @_ || @main::ARGV;
+   my @ARGA = scalar(@_) ? @_ : @main::ARGV;
    my $opt  = {};
    my @DARG;
    my $var = uc(basename($0));
