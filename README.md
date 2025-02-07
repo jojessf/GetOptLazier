@@ -7,15 +7,18 @@ now in cpan! \
 
 # Synopsis
 
-`my ($opt, @DARG) = Getopt::Lazier->new(@ARGV);`
+```
+use Getopt::Lazier "varname";
+
+use Data::Dumper; print Dumper([$varname, \@ARGV]);
+```
 
 # Examples
 
 ```
 echo '
-  use lib "./lib"; use Getopt::Lazier; 
-  my ($opt, @DARG) = Getopt::Lazier->new(@ARGV); 
-  use Data::Dumper; print Dumper([$opt, \@DARG])
+  use lib "./lib"; use Getopt::Lazier "opt"; 
+  use Data::Dumper; print Dumper([$opt, \@ARGV])
 ' > lazyscript.pl
 perl lazyscript.pl -help a b c d -meow=5345923
 ```
